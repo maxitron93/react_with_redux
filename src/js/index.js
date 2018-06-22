@@ -73,28 +73,20 @@ store.dispatch(increaseCount(17))
 // 5. The Provider Component and connection function that allow you to pass the state from the store to your react components.
 // These are the normal React Components, before the state gets passed into them. These need to be made first.
 const Count = (props) => {
-  const handleIncreaseCountByOne = () => {
-    // This is the action defined above
-    store.dispatch(increaseCount(1))
-  }
-  
-  const handleDecreaseCountByOne = () => {
-    // This is the action defined above
-    store.dispatch(reduceCount(1))
-  }
-
-  const handleResetCount = () => {
-    store.dispatch(resetCount())
-  }
-
   return (
     <div>
       <h2>Count from the store! :D</h2>
       <p>Count: {props.count}</p>
       <p>These handlers run actions defined in src/js/actions/count.js :D</p>
-      <button onClick={handleIncreaseCountByOne}>+1</button>
-      <button onClick={handleDecreaseCountByOne}>-1</button>
-      <button onClick={handleResetCount}>Reset</button>
+      <button onClick={() => {
+        props.dispatch(increaseCount(1))
+      }}>+1</button>
+      <button onClick={() => {
+        props.dispatch(reduceCount(1))
+      }}>-1</button>
+      <button onClick={() => {
+        props.dispatch(resetCount())
+      }}>Reset</button>
     </div>
   )
 }
@@ -143,6 +135,13 @@ const ConnectedCount = connect((state) => {
     count: state.count
   }
 })(Count);
+// Alternative syntax:
+// const mapStateToProps = (state) => {
+//   return {
+//     count: state.count
+//   }
+// }
+//const ConnectedCount = connect(mapStateToProps)(Count)
 
 const ConnectedPeople = connect((state) => {
   return {
