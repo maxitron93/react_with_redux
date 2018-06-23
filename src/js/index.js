@@ -30,7 +30,10 @@ const store = createStore(
     count: countReducer,
     people: peopleReducer,
     animals: animalsReducer
-  })
+  }),
+
+  // For use with the Redux DevTools. More info at https://github.com/zalmoxisus/redux-devtools-extension#usage
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 // 2. Reducers - These reducers contain the logic that will process incoming actions and return updated states
 // The reducers are imported above. They need to come before the store because they've been delcared as variables
